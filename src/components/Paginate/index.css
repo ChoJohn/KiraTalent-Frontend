@@ -1,0 +1,35 @@
+.paginate-container {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+}
+
+.paginate-container .page {
+    border-radius: 4px;
+    font-family: 'Roboto', sans-serif;
+    font-size: 16px;
+    color: #574889;
+    background-color: white;
+    border: 1px solid #574889; 
+    margin: 5px;
+    width: 50px;
+    height: 40px;
+}
+
+.paginate-container .current-page {
+    border-radius: 4px;
+    font-family: 'Roboto', sans-serif;
+    font-size: 16px;
+    font-weight: bold;
+    color: #574889;
+    background-color: white;
+    border: 3px solid #574889; 
+    margin: 5px;
+    width: 50px;
+    height: 40px;
+}
+
+.paginate-container .page:focus,
+.paginate-container .current-page:focus {
+    outline: none;
+}

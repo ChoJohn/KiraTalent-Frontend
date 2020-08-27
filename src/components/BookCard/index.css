@@ -1,0 +1,87 @@
+.book-card {
+    width: 100%;
+    height: 100%;
+    min-height: 160px;
+    display: flex;
+    flex-direction: row;
+    justify-content: space-evenly;
+    align-items: center;
+    border: 2px solid #574889;
+    box-sizing: border-box;
+    background-color: white;
+    box-shadow: 0px 4px 18px rgba(0, 0, 0, 0.12), 0px 10px 14px rgba(0, 0, 0, 0.14), 0px 6px 6px rgba(0, 0, 0, 0.2);
+    border-radius: 4px;
+    padding: 35px 60px;
+    margin: 10px;
+}
+
+.book-card .book-information {
+    width: 75%;
+    height: 100%;
+    display: flex;
+    flex-direction: column;
+    justify-content: space-evenly;
+    align-items: flex-start;
+}
+
+.book-card .book-information .title {
+    text-align: left;
+    font-family: 'Roboto', sans-serif;
+    font-size: 24px;
+    font-weight: bold;
+    color: #574889;
+}
+
+.book-card .book-information .author {
+    text-align: left;
+    font-family: 'Roboto', sans-serif;
+    font-size: 16px;
+    color: #574889;
+}
+
+.book-card .library-information {
+    width: 25%;
+    height: 100%;
+    display: flex;
+    flex-direction: column;
+    justify-content: space-evenly;
+    align-items: flex-end;
+}
+
+.book-card .library-information .copies {
+    text-align: right;
+    font-family: 'Roboto', sans-serif;
+    font-size: 16px;
+    color: #574889;
+}
+
+.book-card .library-information .copies .quantity,
+.book-card .library-information .copies .low-quantity {
+    text-align: right;
+    font-family: 'Roboto', sans-serif;
+    font-size: 24px;
+    font-weight: bold;
+    color: #574889;
+}
+
+.book-card .library-information .copies .low-quantity {
+    font-size: 32px;
+    color: red;
+}
+
+.book-card .library-information .reserve,
+.book-card .library-information .unreserve {
+    width: 100px;
+    height: 30px;
+    border-radius: 4px;
+    font-family: 'Roboto', sans-serif;
+    font-size: 16px;
+    color: #574889;
+    background-color: white;
+    border: 1px solid #574889; 
+}
+
+.book-card .library-information .reserve:focus,
+.book-card .library-information .unreserve:focus {
+    outline: none;
+}

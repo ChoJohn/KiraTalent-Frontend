@@ -1,0 +1,16 @@
+#home {
+    width: 100%;
+    height: 100%;
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    align-items: center;
+    background-color: #e0f3fe;
+}
+
+#home h1 {
+    color: #574889;
+    font-family: 'Lato', sans-serif;
+    font-size: 72px;
+    font-weight: bold;
+}
