@@ -19,12 +19,12 @@ class BookCard extends Component {
                 <div className="library-information">
                     <div className="copies">
                         <span className={this.props.book.quantity < 6 ? "low-quantity" : "quantity"}>{this.props.book.quantity} </span>
-                        copies left
+                        {this.props.book.quantity === 1 ? "copy" : "copies"} left
                     </div>
                     {
                         this.props.book.is_reserved
-                        ? <button onClick={() => this.props.handleReservation(this.props.book)} className="unreserve">Unreserve</button>
-                        : <button onClick={() => this.props.handleReservation(this.props.book)} className="reserve">Reserve</button>
+                        ? <button onClick={() => this.props.handleReservation(this.props.book, this.props.filter)} className="unreserve">Unreserve</button>
+                        : <button onClick={() => this.props.handleReservation(this.props.book, this.props.filter)} className="reserve">Reserve</button>
                     }
                 </div>
             </div>

@@ -27,7 +27,7 @@ class Library extends Component {
 
     getBooks() {
         // API fetch to get the data from the database
-        fetch('http://127.0.0.1:8000/library/')
+        fetch('http://127.0.0.1:8000/library/api/')
         .then(response => response.json())
         .then(data => {
             this.setState({
@@ -51,6 +51,7 @@ class Library extends Component {
     getReservedBooks(number) {
         // Choosing a list based on reservations or not
         const filteredList = number ? this.state.bookList.filter(book => book.is_reserved) : this.state.bookList ;
+
         // Updating the page number of the pagination based on filter choice above
         const newPageNumber = this.state.pageNumber > Math.ceil(filteredList.length/3) ? Math.ceil(filteredList.length/3) : this.state.pageNumber;
 
@@ -82,32 +83,35 @@ class Library extends Component {
         })
     }
 
-    handleReservation(book) {
+    handleReservation(book, number) {
         let bookList = this.state.bookList;
         let newList = this.state.newList;
+        // Changing the reserved to unreserved, vice versa
+        book.is_reserved = !book.is_reserved;
         // API call to change it in the database
-
-        // Changing the reserved to unreserved, vice versa.
-        // Only possible to reserve when there are more than 0 copy left.
-        // Increase/decrease quantity number
-        if (!book.is_reserved && book.quantity > 0) {
-            book.is_reserved = !book.is_reserved
-            book.quantity = book.quantity - 1;
-        } else if (book.is_reserved && book.quantity >= 0) {
-            book.is_reserved = !book.is_reserved
-            book.quantity = book.quantity + 1;
-        }
-
-        // Replacing with the updated status
-        bookList[book.id - 1] = book;
-        newList[book.id - 1] = book;
-
-        // Updating the state
-        this.setState({
-            bookList: bookList,
-            newList: newList
+        fetch(`http://127.0.0.1:8000/library/api/${book.id}/`, {
+            method: "PUT",
+            headers: {'Content-type': 'application/json'},
+            body: JSON.stringify(book)
         })
+        .then(response => response.json())
+        .then((data => {
+            // Replacing with the updated status
+            const bookListIndex = bookList.findIndex[book => book.id === data.id];
+            bookList[bookListIndex] = data
+            const newListIndex = newList.findIndex[book => book.id === data.id];
+            newList[newListIndex] = data
 
+            this.setState({
+                bookList: bookList,
+                newList: newList
+            });
+        }))
+        .catch(err => {
+            console.log(err);
+        });
+
+        this.getReservedBooks(number);
     }
 
     render() {
@@ -120,7 +124,8 @@ class Library extends Component {
                             pageNumber={this.state.pageNumber}
                             filter={this.state.filter}
                             search={this.state.form}
-                            handleReservation={this.handleReservation.bind(this)} />
+                            handleReservation={this.handleReservation.bind(this)}
+                            filter={this.state.filter} />
                 {
                     this.state.bookList.length
                     ? <Paginate bookList={this.state.newList} 
